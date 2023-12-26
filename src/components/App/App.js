@@ -21,7 +21,7 @@ export default function Page() {
         <ThemeSwitcher appTheme={appTheme} onThemeSwitchClick={() => setAppTheme(appTheme === 'light' ? 'dark' : 'light')} />
         <Lowercaser />
         <Doodler />
-        <ReadWrite />
+        {/* <ReadWrite /> */}
       </header>
     </div>
   );

@@ -1,7 +1,8 @@
 import { atom, useAtom } from "jotai";
 
+const drawBoxWidth = 400;
+const drawBoxHeight = 200;
 const dotsAtom = atom([]);
-
 const drawingAtom = atom(false);
 
 const handleMouseDownAtom = atom(
@@ -17,7 +18,7 @@ const handleMouseUpAtom = atom(null, (get, set) => {
 
 const handleMouseMoveAtom = atom(
   (get) => get(dotsAtom),
-  (get, set, update: Point) => {
+  (get, set, update) => {
     if (get(drawingAtom)) {
       set(dotsAtom, (prev) => [...prev, update]);
     }
@@ -36,27 +37,25 @@ const SvgDots = () => {
 };
 
 const SvgRoot = () => {
-  const [, handleMouseUp] = useAtom(
-    handleMouseUpAtom
-  );
-  const [, handleMouseDown] = useAtom(
-    handleMouseDownAtom
-  );
-  const [, handleMouseMove] = useAtom(
-    handleMouseMoveAtom
-  );
+  const [, handleMouseUp] = useAtom(handleMouseUpAtom);
+  const [, handleMouseDown] = useAtom(handleMouseDownAtom);
+  const [, handleMouseMove] = useAtom(handleMouseMoveAtom);
   return (
     <svg
-      width="100vw"
-      height="100vh"
-      viewBox="0 0 100vw 100vh"
+      width={drawBoxWidth}
+      height={drawBoxHeight}
+      viewBox={`0 0 ${drawBoxWidth} ${drawBoxHeight}`} // Match the viewBox to the drawBox dimensions
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={(e) => {
-        handleMouseMove([e.clientX, e.clientY]);
+        // Calculate the coordinates within the drawing area
+        const boundingBox = e.currentTarget.getBoundingClientRect();
+        const x = (e.clientX - boundingBox.left) * (drawBoxWidth / boundingBox.width);
+        const y = (e.clientY - boundingBox.top) * (drawBoxHeight / boundingBox.height);
+        handleMouseMove([x, y]);
       }}
     >
-      <rect width="100vw" height="100vh" fill="#eee" />
+      <rect width="100%" height="100%" fill="#eee" />
       <SvgDots />
     </svg>
   );
