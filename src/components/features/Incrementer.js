@@ -1,6 +1,3 @@
-import { useAtom } from 'jotai';
-import { counter } from '../App/App';
-
 export default function Incrementer({ count, onIncrementClick }) {
   const onClick = () => {
     onIncrementClick(prev => prev + 1);

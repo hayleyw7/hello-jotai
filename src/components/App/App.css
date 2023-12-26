@@ -20,6 +20,22 @@ h1 {
   margin: 5rem 5rem 0.5rem 5rem;
 }
 
+p {
+  margin-top: 0.5rem;
+}
+
+button,
+input {
+  background-color: f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 10rem;
+  border: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* theme */
+
 .light {
   background-color: white;
   color: #282c34;
@@ -28,12 +44,4 @@ h1 {
 .dark {
   background-color: #282c34;
   color: white;
-}
-
-button {
-  background-color: f0f0f0;
-  padding: 0.5rem 1rem;
-  border-radius: 10rem;
-  border: none;
-  font-weight: bold;
 }

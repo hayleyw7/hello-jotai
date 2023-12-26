@@ -1,9 +1,9 @@
-import React from 'react';
 import './App.css';
 import { atom, useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import Incrementer from '../features/Incrementer';
-import ThemeSwitcher from '../features/Theme';
+import ThemeSwitcher from '../features/ThemeSwitcher';
+import Lowercaser from '../features/Lowercaser';
 
 const counter = atomWithStorage('count', 0);
 const theme = atomWithStorage('dark', false);
@@ -17,6 +17,7 @@ export default function Page() {
       <header className="App-header">
         <Incrementer count={count} onIncrementClick={() => setCounter(prev => prev + 1)} />
         <ThemeSwitcher appTheme={appTheme} onThemeSwitchClick={() => setAppTheme(appTheme === 'light' ? 'dark' : 'light')} />
+        <Lowercaser />
       </header>
     </div>
   );
