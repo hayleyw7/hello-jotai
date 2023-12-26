@@ -1,6 +1,10 @@
 import React from 'react';
 
-export default function Incrementer({ count, onClick }) {
+export default function Incrementer({ count, onIncrementClick }) {
+  const onClick = () => {
+    onIncrementClick();
+  };
+
   return (
     <section>
       <h1>Incrementer: {count}</h1>

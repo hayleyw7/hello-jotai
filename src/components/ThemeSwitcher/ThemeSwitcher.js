@@ -1,11 +1,14 @@
-// ThemeSwitcher.js
 import React from 'react';
 
-export default function ThemeSwitcher({ appTheme, onClick }) {
+export default function ThemeSwitcher({ appTheme, onThemeSwitchClick }) {
+  const handleClick = () => {
+    onThemeSwitchClick();
+  };
+
   return (
     <section>
       <h1>Theme Switcher</h1>
-      <button onClick={onClick}>{appTheme === 'light' ? 'DARK' : 'LIGHT'}</button>
+      <button onClick={handleClick}>{appTheme === 'light' ? 'DARK' : 'LIGHT'}</button>
     </section>
   );
 }

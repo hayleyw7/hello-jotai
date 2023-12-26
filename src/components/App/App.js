@@ -19,8 +19,8 @@ export default function Page() {
   return (
     <div className={`App ${appTheme}`}>
       <header className="App-header">
-        <Incrementer count={count} onClick={handleIncrementClick} />
-        <ThemeSwitcher appTheme={appTheme} onClick={handleThemeSwitchClick} />
+        <Incrementer count={count} onIncrementClick={handleIncrementClick} />
+        <ThemeSwitcher appTheme={appTheme} onThemeSwitchClick={handleThemeSwitchClick} />
       </header>
     </div>
   );
