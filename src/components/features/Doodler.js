@@ -57,7 +57,7 @@ const SvgRoot = () => {
   );
 };
 
-export default function WriteOnly() {
+export default function Doodler() {
   return (
     <section>
       <h1>Doodler</h1>

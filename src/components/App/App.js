@@ -5,6 +5,7 @@ import Incrementer from '../features/Incrementer';
 import ThemeSwitcher from '../features/ThemeSwitcher';
 import Lowercaser from '../features/Lowercaser';
 import Doodler from '../features/Doodler';
+import ReadWrite from '../features/ReadWrite';
 
 const counter = atomWithStorage('count', 0);
 const theme = atomWithStorage('dark', false);
@@ -20,6 +21,7 @@ export default function Page() {
         <ThemeSwitcher appTheme={appTheme} onThemeSwitchClick={() => setAppTheme(appTheme === 'light' ? 'dark' : 'light')} />
         <Lowercaser />
         <Doodler />
+        <ReadWrite />
       </header>
     </div>
   );
