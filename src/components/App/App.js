@@ -1,5 +1,8 @@
+import React from 'react';
 import './App.css';
 import { atom, useAtom } from 'jotai';
+import Incrementer from '../Incrementer/Incrementer';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 
 const counter = atom(0);
 const theme = atom('dark');
@@ -8,24 +11,16 @@ export default function Page() {
   const [count, setCounter] = useAtom(counter);
   const [appTheme, setAppTheme] = useAtom(theme);
 
-  const onClick = () => setCounter(prev => prev + 1);
-
-  const handleClick = () => {
+  const handleIncrementClick = () => setCounter(prev => prev + 1);
+  const handleThemeSwitchClick = () => {
     setAppTheme(appTheme === 'light' ? 'dark' : 'light');
   };
 
   return (
     <div className={`App ${appTheme}`}>
       <header className="App-header">
-        <section>
-          <h1>Incrementer: {count}</h1>
-          <button onClick={onClick}>+1</button>
-        </section>
-
-        <section>
-          <h1>Theme Switcher</h1>
-          <button onClick={handleClick}>{appTheme === 'light' ? 'DARK' : 'LIGHT'}</button>
-        </section>
+        <Incrementer count={count} onClick={handleIncrementClick} />
+        <ThemeSwitcher appTheme={appTheme} onClick={handleThemeSwitchClick} />
       </header>
     </div>
   );
