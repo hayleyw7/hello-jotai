@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
 import { atom, useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 import Incrementer from '../Incrementer/Incrementer';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 
 const counter = atom(0);
-const theme = atom('dark');
+const theme = atomWithStorage('dark', false);
 
 export default function Page() {
   const [count, setCounter] = useAtom(counter);
