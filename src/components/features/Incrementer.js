@@ -8,7 +8,7 @@ export default function Incrementer({ count, onIncrementClick }) {
   return (
     <section>
       <h1>Incrementer: {count}</h1>
-      <button onClick={onClick}>PLUS ONE</button>
+      <button onClick={onClick}>+1</button>
     </section>
   );
 }

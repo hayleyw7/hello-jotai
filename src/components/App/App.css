@@ -22,10 +22,18 @@ h1 {
 
 .light {
   background-color: white;
-  color: black;
+  color: #282c34;
 }
 
 .dark {
   background-color: #282c34;
   color: white;
+}
+
+button {
+  background-color: f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 10rem;
+  border: none;
+  font-weight: bold;
 }

@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import { atom, useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import Incrementer from '../Incrementer/Incrementer';
-import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
+import Incrementer from '../features/Incrementer';
+import ThemeSwitcher from '../features/Theme';
 
 const counter = atom(0);
 const theme = atomWithStorage('dark', false);
