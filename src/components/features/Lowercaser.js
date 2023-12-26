@@ -2,7 +2,7 @@ import { atom, useAtom } from 'jotai';
 
 const textAtom = atom('edit me');
 
-export default function Page() {
+export default function Lowercaser() {
   const [text, setText] = useAtom(textAtom);
 
   const handleChange = (e) => {
