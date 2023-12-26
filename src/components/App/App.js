@@ -5,7 +5,7 @@ import { atomWithStorage } from 'jotai/utils';
 import Incrementer from '../features/Incrementer';
 import ThemeSwitcher from '../features/Theme';
 
-const counter = atom(0);
+const counter = atomWithStorage('count', 0);
 const theme = atomWithStorage('dark', false);
 
 export default function Page() {

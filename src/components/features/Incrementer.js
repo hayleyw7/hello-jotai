@@ -1,8 +1,9 @@
-import React from 'react';
+import { useAtom } from 'jotai';
+import { counter } from '../App/App';
 
 export default function Incrementer({ count, onIncrementClick }) {
   const onClick = () => {
-    onIncrementClick();
+    onIncrementClick(prev => prev + 1);
   };
 
   return (
