@@ -12,16 +12,11 @@ export default function Page() {
   const [count, setCounter] = useAtom(counter);
   const [appTheme, setAppTheme] = useAtom(theme);
 
-  const handleIncrementClick = () => setCounter(prev => prev + 1);
-  const handleThemeSwitchClick = () => {
-    setAppTheme(appTheme === 'light' ? 'dark' : 'light');
-  };
-
   return (
     <div className={`App ${appTheme}`}>
       <header className="App-header">
-        <Incrementer count={count} onIncrementClick={handleIncrementClick} />
-        <ThemeSwitcher appTheme={appTheme} onThemeSwitchClick={handleThemeSwitchClick} />
+        <Incrementer count={count} onIncrementClick={() => setCounter(prev => prev + 1)} />
+        <ThemeSwitcher appTheme={appTheme} onThemeSwitchClick={() => setAppTheme(appTheme === 'light' ? 'dark' : 'light')} />
       </header>
     </div>
   );
