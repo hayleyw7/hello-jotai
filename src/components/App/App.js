@@ -6,6 +6,7 @@ import ThemeSwitcher from '../features/ThemeSwitcher';
 import Lowercaser from '../features/Lowercaser';
 import Doodler from '../features/Doodler';
 // import ReadWrite from '../features/ReadWrite';
+import Updater from '../features/Updater';
 
 const counter = atomWithStorage('count', 0);
 const theme = atomWithStorage('dark', false);
@@ -20,6 +21,7 @@ export default function Page() {
         <Incrementer count={count} onIncrementClick={() => setCounter(prev => prev + 1)} setCounter={setCounter} />
         <ThemeSwitcher appTheme={appTheme} onThemeSwitchClick={() => setAppTheme(appTheme === 'light' ? 'dark' : 'light')} />
         <Lowercaser />
+        <Updater />
         <Doodler />
         {/* <ReadWrite /> */}
       </header>

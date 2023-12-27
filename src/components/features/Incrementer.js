@@ -1,5 +1,4 @@
 export default function Incrementer({ count, onIncrementClick, setCounter }) {
-  
   const onAddOneClick = () => {
     onIncrementClick(prev => prev + 1);
   };
