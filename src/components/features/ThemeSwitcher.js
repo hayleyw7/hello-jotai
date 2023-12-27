@@ -1,4 +1,4 @@
-export default function Theme({ appTheme, onThemeSwitchClick }) {
+export default function ThemeSwitcher({ appTheme, onThemeSwitchClick }) {
   const handleClick = () => {
     onThemeSwitchClick();
   };
@@ -6,7 +6,7 @@ export default function Theme({ appTheme, onThemeSwitchClick }) {
   return (
     <section>
       <h1>Theme Switcher</h1>
-      <button onClick={handleClick}>{appTheme === 'light' ? 'LIGHT' : 'DARK'}</button>
+      <button onClick={handleClick}>{appTheme ? 'DARK' : 'LIGHT'}</button>
     </section>
   );
 }
