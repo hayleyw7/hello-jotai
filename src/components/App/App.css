@@ -20,16 +20,26 @@ p {
   margin: 0.5rem 0.5rem 0 0.5rem;
 }
 
+/* interactive */
+
 button,
 input,
 svg {
   background-color: #f0f0f0;
   padding: 0.5rem 1rem;
-  border-radius: 10rem;
   border: none;
   font-weight: bold;
   text-align: center;
   margin: 0 0.25rem;
+}
+
+button,
+input {
+  border-radius: 10rem;
+}
+
+svg {
+  border-radius: 100rem;
 }
 
 /* theme */
