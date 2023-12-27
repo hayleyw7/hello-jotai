@@ -1,35 +1,13 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { atom, useAtom } from 'jotai';
 
 const dotsAtom = atom([]);
-const drawingAtom = atom(false);
-
-const handleStartAtom = atom(null, (get, set, event) => {
-  set(drawingAtom, true);
-  const coords = getCoordinates(event);
-  set(dotsAtom, (prev) => [...prev, coords]);
-});
-
-const handleEndAtom = atom(null, (get, set) => {
-  set(drawingAtom, false);
-});
-
-const handleMoveAtom = atom(null, (get, set, event) => {
-  if (get(drawingAtom)) {
-    const coords = getCoordinates(event);
-    set(dotsAtom, (prev) => [...prev, coords]);
-  }
-});
-
-const getCoordinates = (event) => {
-  const rect = event.target.getBoundingClientRect();
-  const x = (event.clientX - rect.left) * (drawBoxWidth / rect.width);
-  const y = (event.clientY - rect.top) * (drawBoxHeight / rect.height);
-  return [x, y];
-};
+const drawBoxWidth = 200;
+const drawBoxHeight = 200;
 
 const SvgDots = () => {
   const [dots] = useAtom(dotsAtom);
+
   return (
     <g>
       {dots.map(([x, y], index) => (
@@ -40,15 +18,39 @@ const SvgDots = () => {
 };
 
 const SvgRoot = () => {
-  const [, handleEnd] = useAtom(handleEndAtom);
-  const [, handleStart] = useAtom(handleStartAtom);
-  const [, handleMove] = useAtom(handleMoveAtom);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [dots, setDots] = useAtom(dotsAtom);
 
-  const drawBoxWidth = 200;
-  const drawBoxHeight = 200;
+  const svgRef = useRef(null);
+
+  const handleStart = (event) => {
+    event.preventDefault();
+    setIsDrawing(true);
+    const coords = getCoordinates(event);
+    setDots([...dots, coords]);
+  };
+
+  const handleEnd = () => {
+    setIsDrawing(false);
+  };
+
+  const handleMove = (event) => {
+    if (isDrawing) {
+      const coords = getCoordinates(event);
+      setDots([...dots, coords]);
+    }
+  };
+
+  const getCoordinates = (event) => {
+    const rect = svgRef.current.getBoundingClientRect();
+    const x = (event.clientX - rect.left) * (drawBoxWidth / rect.width);
+    const y = (event.clientY - rect.top) * (drawBoxHeight / rect.height);
+    return [x, y];
+  };
 
   return (
     <svg
+      ref={svgRef}
       width={drawBoxWidth}
       height={drawBoxHeight}
       viewBox={`0 0 ${drawBoxWidth} ${drawBoxHeight}`}
