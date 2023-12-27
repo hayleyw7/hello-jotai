@@ -6,7 +6,7 @@ export default function Theme({ appTheme, onThemeSwitchClick }) {
   return (
     <section>
       <h1>Theme Switcher</h1>
-      <button onClick={handleClick}>{appTheme === 'dark' ? 'LIGHT' : 'DARK'}</button>
+      <button onClick={handleClick}>{appTheme === 'light' ? 'LIGHT' : 'DARK'}</button>
     </section>
   );
 }
