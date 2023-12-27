@@ -4,19 +4,29 @@ import { atom, useAtom } from 'jotai';
 const dotsAtom = atom([]);
 const drawingAtom = atom(false);
 
-const handleMouseDownAtom = atom(null, (get, set) => {
+const handleStartAtom = atom(null, (get, set, event) => {
   set(drawingAtom, true);
+  const coords = getCoordinates(event);
+  set(dotsAtom, (prev) => [...prev, coords]);
 });
 
-const handleMouseUpAtom = atom(null, (get, set) => {
+const handleEndAtom = atom(null, (get, set) => {
   set(drawingAtom, false);
 });
 
-const handleMouseMoveAtom = atom(null, (get, set, update) => {
+const handleMoveAtom = atom(null, (get, set, event) => {
   if (get(drawingAtom)) {
-    set(dotsAtom, (prev) => [...prev, update]);
+    const coords = getCoordinates(event);
+    set(dotsAtom, (prev) => [...prev, coords]);
   }
 });
+
+const getCoordinates = (event) => {
+  const rect = event.target.getBoundingClientRect();
+  const x = (event.clientX - rect.left) * (drawBoxWidth / rect.width);
+  const y = (event.clientY - rect.top) * (drawBoxHeight / rect.height);
+  return [x, y];
+};
 
 const SvgDots = () => {
   const [dots] = useAtom(dotsAtom);
@@ -30,9 +40,9 @@ const SvgDots = () => {
 };
 
 const SvgRoot = () => {
-  const [, handleMouseUp] = useAtom(handleMouseUpAtom);
-  const [, handleMouseDown] = useAtom(handleMouseDownAtom);
-  const [, handleMouseMove] = useAtom(handleMouseMoveAtom);
+  const [, handleEnd] = useAtom(handleEndAtom);
+  const [, handleStart] = useAtom(handleStartAtom);
+  const [, handleMove] = useAtom(handleMoveAtom);
 
   const drawBoxWidth = 200;
   const drawBoxHeight = 200;
@@ -42,13 +52,17 @@ const SvgRoot = () => {
       width={drawBoxWidth}
       height={drawBoxHeight}
       viewBox={`0 0 ${drawBoxWidth} ${drawBoxHeight}`}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseMove={(e) => {
-        const rect = e.target.getBoundingClientRect();
-        const x = (e.clientX - rect.left) * (drawBoxWidth / rect.width);
-        const y = (e.clientY - rect.top) * (drawBoxHeight / rect.height);
-        handleMouseMove([x, y]);
+      onMouseDown={handleStart}
+      onMouseUp={handleEnd}
+      onMouseMove={handleMove}
+      onTouchStart={(e) => {
+        e.preventDefault();
+        handleStart(e.touches[0]);
+      }}
+      onTouchEnd={handleEnd}
+      onTouchMove={(e) => {
+        e.preventDefault();
+        handleMove(e.touches[0]);
       }}
     >
       <rect width={drawBoxWidth} height={drawBoxHeight} fill="#eee" />
