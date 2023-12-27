@@ -34,7 +34,7 @@ const SvgRoot = () => {
   const [, handleMouseDown] = useAtom(handleMouseDownAtom);
   const [, handleMouseMove] = useAtom(handleMouseMoveAtom);
 
-  const drawBoxWidth = 400;
+  const drawBoxWidth = 200;
   const drawBoxHeight = 200;
 
   return (
